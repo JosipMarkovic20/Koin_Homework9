@@ -11,6 +11,7 @@ import hr.ferit.brunozoric.taskie.common.visible
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
 import kotlinx.android.synthetic.main.fragment_task_details.*
 import kotlinx.android.synthetic.main.fragment_tasks.*
@@ -33,7 +34,6 @@ class TaskDetailsFragment : BaseFragment(), EditTaskFragmentDialog.TaskEditedLis
         tryDisplayTask(taskID)
         initListeners()
     }
-
 
     private fun tryDisplayTask(id: Int) {
         try {

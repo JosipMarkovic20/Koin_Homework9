@@ -20,7 +20,7 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutResourceId())
         setUpUi()
-        selectFragment()
+
     }
 
     protected fun showFragment(fragment: Fragment){
@@ -32,24 +32,7 @@ abstract class BaseActivity: AppCompatActivity() {
 
 
 
-    fun selectFragment(){
-        navigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-               R.id.tasks_navigation -> {
-                    val fragment = TasksFragment()
-                    supportFragmentManager.beginTransaction().replace(hr.ferit.brunozoric.taskie.R.id.navigationContainer, fragment, fragment.javaClass.getSimpleName())
-                        .commit()
-                    true
-                }
-                R.id.about_navigation ->{
-                    val fragment = PagerFragment()
-                    supportFragmentManager.beginTransaction().replace(hr.ferit.brunozoric.taskie.R.id.navigationContainer, fragment, fragment.javaClass.getSimpleName())
-                        .commit()
-                    true
-                }else -> false
-            }
-        }
-    }
+
 
 
 }

@@ -15,7 +15,7 @@ class TaskAdapter(private val onItemSelected: (Task) -> Unit) : Adapter<TaskHold
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskHolder {
-        val v = LayoutInflater.from(parent.context).inflate(hr.ferit.brunozoric.taskie.R.layout.item_task, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
         return TaskHolder(v)
     }
 

@@ -3,8 +3,10 @@ package hr.ferit.brunozoric.taskie.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.SimpleAdapter
+import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +33,6 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         initListeners()
         refreshTasks()
     }
-
 
 
     private fun initUi() {
