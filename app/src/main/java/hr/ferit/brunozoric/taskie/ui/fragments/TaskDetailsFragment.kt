@@ -2,6 +2,7 @@ package hr.ferit.brunozoric.taskie.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat.recreate
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.displayToast
@@ -44,7 +45,7 @@ class TaskDetailsFragment : BaseFragment() {
     }
 
     private fun editTask() {
-        val dialog = EditTaskFragmentDialog.newInstance()
+        val dialog = EditTaskFragmentDialog.newInstance(taskID)
         dialog.show(childFragmentManager, dialog.tag)
     }
 

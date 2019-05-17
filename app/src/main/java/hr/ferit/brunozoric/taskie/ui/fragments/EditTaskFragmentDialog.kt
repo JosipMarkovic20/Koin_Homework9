@@ -17,7 +17,7 @@ import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
 
 
-class EditTaskFragmentDialog : DialogFragment() {
+class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
 
     private var repository = TasksRoomRepository()
     lateinit var task: Task
@@ -52,6 +52,9 @@ class EditTaskFragmentDialog : DialogFragment() {
             }
             editPrioritySelector.setSelection(selection)
         }
+
+
+        task= repository.getTaskBy(taskID)
     }
 
     private fun getCurrentPriority (): String? {
@@ -106,7 +109,7 @@ class EditTaskFragmentDialog : DialogFragment() {
     }
 
     companion object {
-        fun newInstance() = EditTaskFragmentDialog()
+        fun newInstance(taskID: Int) = EditTaskFragmentDialog(taskID)
     }
 
 }
