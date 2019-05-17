@@ -99,6 +99,7 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
         clearUi()
 
         dismiss()
+
     }
 
 

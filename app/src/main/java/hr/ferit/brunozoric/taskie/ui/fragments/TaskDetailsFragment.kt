@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
 import kotlinx.android.synthetic.main.fragment_task_details.*
 import kotlinx.android.synthetic.main.fragment_tasks.*
 
+
+
 class TaskDetailsFragment : BaseFragment() {
 
     private val repository = TasksRoomRepository()
@@ -47,6 +49,7 @@ class TaskDetailsFragment : BaseFragment() {
     private fun editTask() {
         val dialog = EditTaskFragmentDialog.newInstance(taskID)
         dialog.show(childFragmentManager, dialog.tag)
+
     }
 
     private fun displayTask(task: Task) {
