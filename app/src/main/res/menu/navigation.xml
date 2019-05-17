@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/tasks_navigation"
+            android:icon="@drawable/ic_tasks_navigation"
+            android:title="@string/tasksNavigation"/>
+
+    <item
+            android:id="@+id/about_navigation"
+            android:icon="@drawable/ic_about_navigation"
+            android:title="@string/aboutNavigation"/>
+
+
+
+</menu>

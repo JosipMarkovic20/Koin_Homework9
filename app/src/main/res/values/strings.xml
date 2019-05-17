@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Taskie</string>
+    <string name="newTaskHeadingText">New task:</string>
+    <string name="newTaskTitleInputHint">Enter task title</string>
+    <string name="newTaskDescriptionInputHint">Enter task description</string>
+    <string name="lowPriority">Low</string>
+    <string name="mediumPriority">Medium</string>
+    <string name="highPriority">High</string>
+    <string name="saveTaskActionText">Save</string>
+    <string name="emptyFields">Check your inputs</string>
+    <string name="noTaskFound">No such task found</string>
+    <string name="no_data">No data! :(</string>
+    <string name="tasksNavigation">Tasks</string>
+    <string name="aboutNavigation">About</string>
+    <string name="aboutMeText">Made by: Josip Marković\nFirst year student at Faculty of Electrical Engineering, Computer Science and Information Technology Osijek.</string>
+    <string name="aboutAppText">This is an app that lets you keep track of your everyday tasks.
+        This app is created by Josip Marković as part of Android Dev Academy 2019.</string>
+    <string name="aboutapp">About App</string>
+    <string name="aboutme">About Me</string>
+    <string name="edit_task_heading">Edit Task:</string>
+    <string name="edit_task_title">Enter new task title</string>
+    <string name="edit_task_description">Enter new task description</string>
+</resources>
