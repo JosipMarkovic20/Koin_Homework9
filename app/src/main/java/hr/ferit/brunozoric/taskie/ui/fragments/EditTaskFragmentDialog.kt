@@ -20,13 +20,22 @@ import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
 class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
 
     private var repository = TasksRoomRepository()
+    private var taskEditedListener: TaskEditedListener? = null
     lateinit var task: Task
+
+    interface TaskEditedListener{
+        fun onTaskEdited(task: Task)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.FragmentDialogTheme)
 
+    }
+
+    fun setTaskEditedListener(listener: TaskEditedListener){
+        taskEditedListener = listener
     }
 
 
@@ -97,6 +106,8 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
         savePriority(priority.toString())
 
         clearUi()
+
+        taskEditedListener?.onTaskEdited(task)
 
         dismiss()
 
