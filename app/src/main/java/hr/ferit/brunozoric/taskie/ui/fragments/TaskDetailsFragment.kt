@@ -17,6 +17,7 @@ class TaskDetailsFragment : BaseFragment() {
     private val repository = TasksRoomRepository()
     private var taskID = NO_TASK
 
+
     override fun getLayoutResourceId(): Int {
         return R.layout.fragment_task_details
     }
@@ -27,6 +28,7 @@ class TaskDetailsFragment : BaseFragment() {
         tryDisplayTask(taskID)
         initListeners()
     }
+
 
     private fun tryDisplayTask(id: Int) {
         try {

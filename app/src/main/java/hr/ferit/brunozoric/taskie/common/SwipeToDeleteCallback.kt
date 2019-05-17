@@ -58,7 +58,7 @@ import hr.ferit.brunozoric.taskie.R
         val deleteIconBottom = deleteIconTop + intrinsicHeight
 
         deleteIcon!!.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
-        deleteIcon!!.draw(c)
+        deleteIcon.draw(c)
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }

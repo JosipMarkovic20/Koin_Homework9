@@ -9,7 +9,6 @@ import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import hr.ferit.brunozoric.taskie.R
-import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
@@ -21,20 +20,13 @@ import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
 class EditTaskFragmentDialog : DialogFragment() {
 
     private var repository = TasksRoomRepository()
-    private var taskEditedListener: TaskEditedListener? = null
     lateinit var task: Task
-    private var taskID = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.FragmentDialogTheme)
 
-    }
-
-    private fun getTaskToEdit(): Task{
-        arguments?.getInt(EXTRA_TASK_ID)?.let { taskID = it }
-        return repository.getTaskBy(taskID)
     }
 
 
@@ -92,8 +84,6 @@ class EditTaskFragmentDialog : DialogFragment() {
             return
         }
 
-        val task = getTaskToEdit()
-
         val title = editTaskTitleInput.text.toString()
         val description = editTaskDescriptionInput.text.toString()
         val priority = editPrioritySelector.selectedItem as Priority
@@ -105,13 +95,9 @@ class EditTaskFragmentDialog : DialogFragment() {
 
         clearUi()
 
-        taskEditedListener?.onTaskEdited()
         dismiss()
     }
 
-    fun setTaskEditedListener(taskEditedListener: TaskEditedListener) {
-        this.taskEditedListener = taskEditedListener
-    }
 
     private fun clearUi() {
         editTaskTitleInput.text.clear()
