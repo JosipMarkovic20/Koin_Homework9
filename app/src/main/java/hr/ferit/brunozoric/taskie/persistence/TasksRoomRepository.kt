@@ -34,4 +34,8 @@ class TasksRoomRepository : TasksRepository {
         taskDao.changeTaskDescription(task.taskDbId!!, newDescription)
         taskDao.changeTaskPriority(task.taskDbId!!,newPriority)
     }
+
+    override fun sortTasks(): List<Task> {
+        return taskDao.getTasksOrderedByPriority()
+    }
 }

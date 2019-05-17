@@ -35,4 +35,7 @@ interface TaskDao {
 
     @Query("UPDATE task SET priority = :newPriority WHERE taskDbId = :taskId")
     fun changeTaskPriority(taskId: Int, newPriority: Priority)
+
+    @Query("SELECT * FROM task ORDER BY priority")
+    fun getTasksOrderedByPriority(): List<Task>
 }

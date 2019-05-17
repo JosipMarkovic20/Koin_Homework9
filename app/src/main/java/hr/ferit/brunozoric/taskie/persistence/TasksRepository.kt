@@ -11,5 +11,6 @@ interface TasksRepository {
     fun deleteTaskBy(task: Task)
     fun clearAllTasks()
     fun editTask(task: Task, newTitle: String, newDescription: String, newPriority: Priority)
+    fun sortTasks(): List<Task>
 
 }

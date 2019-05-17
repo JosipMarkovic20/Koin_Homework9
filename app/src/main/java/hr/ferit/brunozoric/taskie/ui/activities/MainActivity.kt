@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import hr.ferit.brunozoric.taskie.ui.activities.base.BaseActivity
+import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
 import hr.ferit.brunozoric.taskie.ui.fragments.PagerFragment
 import hr.ferit.brunozoric.taskie.ui.fragments.TasksFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
 
     override fun getLayoutResourceId() = R.layout.activity_main
-    private val repository = TasksRoomRepository()
 
     override fun setUpUi() {
         showFragment(TasksFragment.newInstance())
@@ -51,29 +51,7 @@ class MainActivity : BaseActivity() {
         recreate()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.sorting_and_clearing_menu, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.sortMenuItem -> {
-                sortByPriority()
-                recreate()
-            }
-            R.id.deleteMenuItem -> {
-                repository.clearAllTasks()
-                recreate()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun sortByPriority(){
-
-    }
 
 
 
