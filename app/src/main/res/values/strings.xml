@@ -20,4 +20,6 @@
     <string name="edit_task_heading">Edit Task:</string>
     <string name="edit_task_title">Enter new task title</string>
     <string name="edit_task_description">Enter new task description</string>
+    <string name="sort_by_priority">Sort by priority</string>
+    <string name="delete_all_tasks">Delete all tasks</string>
 </resources>

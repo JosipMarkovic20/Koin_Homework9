@@ -2,6 +2,7 @@ package hr.ferit.brunozoric.taskie.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.widget.SimpleAdapter
 import androidx.fragment.app.Fragment
@@ -30,6 +31,8 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         initListeners()
         refreshTasks()
     }
+
+
 
     private fun initUi() {
         progress.visible()
