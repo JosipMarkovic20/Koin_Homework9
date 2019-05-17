@@ -29,7 +29,9 @@ class TasksRoomRepository : TasksRepository {
         taskDao.deleteAllTasks()
     }
 
-    override fun editTask(task: Task) {
-        taskDao.updateTask(task)
+    override fun editTask(task: Task, newTitle: String, newDescription: String, newPriority: Priority) {
+        taskDao.changeTaskTitle(task.taskDbId!!,newTitle)
+        taskDao.changeTaskDescription(task.taskDbId!!, newDescription)
+        taskDao.changeTaskPriority(task.taskDbId!!,newPriority)
     }
 }

@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import hr.ferit.brunozoric.taskie.R
+import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.PriorityPrefs
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
-import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
-import kotlinx.android.synthetic.main.fragment_task_details.*
 
 
 class EditTaskFragmentDialog : DialogFragment() {
@@ -25,11 +23,18 @@ class EditTaskFragmentDialog : DialogFragment() {
     private var repository = TasksRoomRepository()
     private var taskEditedListener: TaskEditedListener? = null
     lateinit var task: Task
+    private var taskID = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.FragmentDialogTheme)
+
+    }
+
+    private fun getTaskToEdit(): Task{
+        arguments?.getInt(EXTRA_TASK_ID)?.let { taskID = it }
+        return repository.getTaskBy(taskID)
     }
 
 
@@ -87,12 +92,14 @@ class EditTaskFragmentDialog : DialogFragment() {
             return
         }
 
+        val task = getTaskToEdit()
+
         val title = editTaskTitleInput.text.toString()
         val description = editTaskDescriptionInput.text.toString()
         val priority = editPrioritySelector.selectedItem as Priority
-        val task = Task(title = title, description = description, priority = priority)
 
-        repository.editTask(task)
+
+        repository.editTask(task, title, description, priority)
 
         savePriority(priority.toString())
 

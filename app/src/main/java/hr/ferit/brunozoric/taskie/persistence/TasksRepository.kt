@@ -10,6 +10,6 @@ interface TasksRepository {
     fun getTaskBy(id: Int): Task
     fun deleteTaskBy(task: Task)
     fun clearAllTasks()
-    fun editTask(task: Task)
+    fun editTask(task: Task, newTitle: String, newDescription: String, newPriority: Priority)
 
 }
