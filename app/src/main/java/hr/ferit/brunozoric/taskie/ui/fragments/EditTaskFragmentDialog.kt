@@ -15,6 +15,8 @@ import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.PriorityPrefs
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
+import kotlinx.android.synthetic.main.fragment_dialog_edit_task.view.*
+import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
 
 
 class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
@@ -51,19 +53,23 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
 
     private fun initUI() {
 
+        task= repository.getTaskBy(taskID)
+
         context?.let {
             editPrioritySelector.adapter = ArrayAdapter<Priority>(it, android.R.layout.simple_spinner_dropdown_item, Priority.values())
-            val selection = when(getCurrentPriority()){
+            val selection = when(task.priority.toString()){
                 "LOW" -> 0
                 "MEDIUM" -> 1
                 "HIGH" -> 2
                 else -> 0
             }
+            editTaskTitleInput.setText(task.title)
+            editTaskDescriptionInput.setText(task.description)
             editPrioritySelector.setSelection(selection)
         }
 
 
-        task= repository.getTaskBy(taskID)
+
     }
 
     private fun getCurrentPriority (): String? {
