@@ -22,4 +22,6 @@
     <string name="edit_task_description">Enter new task description</string>
     <string name="sort_by_priority">Sort by priority</string>
     <string name="delete_all_tasks">Delete all tasks</string>
+    <string name="delete_all_tasks_dialog">Do you want to clear all tasks?</string>
+    <string name="delete_task_dialog">Do you want to delete selected task?</string>
 </resources>

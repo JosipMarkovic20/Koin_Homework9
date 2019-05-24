@@ -18,6 +18,7 @@ class TaskPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
         }
     }
 
+
     override fun getPageTitle(position: Int): CharSequence? {
         var title: String? = null
         if (position == 0) {

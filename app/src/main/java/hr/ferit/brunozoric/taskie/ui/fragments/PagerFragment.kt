@@ -14,11 +14,6 @@ import com.google.android.material.tabs.TabLayout
 
 
 
-
-
-
-
-
 class PagerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,

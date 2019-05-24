@@ -1,13 +1,11 @@
 package hr.ferit.brunozoric.taskie.ui.activities
 
 import android.view.View
-import androidx.fragment.app.Fragment
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.EXTRA_SCREEN_TYPE
 import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.ui.activities.base.BaseActivity
 import hr.ferit.brunozoric.taskie.ui.fragments.TaskDetailsFragment
-import hr.ferit.brunozoric.taskie.ui.fragments.TasksFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ContainerActivity: BaseActivity() {

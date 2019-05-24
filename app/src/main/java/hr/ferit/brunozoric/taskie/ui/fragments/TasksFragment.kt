@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.SimpleAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -48,9 +49,7 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val task = adapter.getTaskAtPosition(position)
-                repository.deleteTaskBy(task)
-                adapter.removeAt(position)
-
+                showDeleteTaskDialog(task, position)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
@@ -59,6 +58,26 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
 
     private fun initListeners() {
         addTask.setOnClickListener { addTask() }
+    }
+
+    private fun showDeleteTaskDialog(task: Task, position: Int){
+        AlertDialog.Builder(context!!)
+            .setTitle(getString(R.string.delete_task_dialog))
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                repository.deleteTaskBy(task)
+                adapter.removeAt(position) }
+            .setNegativeButton(android.R.string.no, null).show()
+        refreshTasks()
+    }
+
+    private fun showClearAllTasksDialog(){
+        AlertDialog.Builder(context!!)
+            .setTitle(getString(R.string.delete_all_tasks_dialog))
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes) { _, _ -> clearAllTasks()}
+            .setNegativeButton(android.R.string.no, null).show()
+        refreshTasks()
     }
 
     private fun onItemSelected(task: Task){
@@ -101,7 +120,7 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
                 sortByPriority()
             }
             R.id.deleteMenuItem -> {
-                clearAllTasks()
+                showClearAllTasksDialog()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -124,7 +143,6 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         val data: MutableList<Task> = mutableListOf()
         adapter.setData(data)
         noData.visible()
-
     }
 
     companion object {

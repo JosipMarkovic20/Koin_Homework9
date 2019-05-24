@@ -21,5 +21,4 @@ class TaskHolder(override val containerView: View) : RecyclerView.ViewHolder(con
         DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(containerView.context, task.priority.getColor()))
     }
 
-
 }
