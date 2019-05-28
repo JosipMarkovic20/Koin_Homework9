@@ -1,7 +1,6 @@
 package hr.ferit.brunozoric.taskie.persistence
 
 import android.preference.PreferenceManager
-import hr.ferit.brunozoric.taskie.Taskie
 import hr.ferit.brunozoric.taskie.app.TaskieApp
 
 object PriorityPrefs {
