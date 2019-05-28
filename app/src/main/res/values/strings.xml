@@ -24,4 +24,13 @@
     <string name="delete_all_tasks">Delete all tasks</string>
     <string name="delete_all_tasks_dialog">Do you want to clear all tasks?</string>
     <string name="delete_task_dialog">Do you want to delete selected task?</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="logout">LOGOUT</string>
+    <string name="signOut">SIGN OUT</string>
+    <string name="goToRegister">Not a member? Sign up now.</string>
+    <string name="goTologin">Already registred! Login Me.</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Name</string>
 </resources>
