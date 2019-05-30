@@ -12,5 +12,6 @@ interface TasksRepository {
     fun clearAllTasks()
     fun editTask(task: Task, newTitle: String, newDescription: String, newPriority: Priority)
     fun sortTasks(): List<Task>
+    fun addTasks(tasks: MutableList<Task>)
 
 }

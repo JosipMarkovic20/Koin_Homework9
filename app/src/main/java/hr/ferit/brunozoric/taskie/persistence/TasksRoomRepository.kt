@@ -38,4 +38,8 @@ class TasksRoomRepository : TasksRepository {
     override fun sortTasks(): List<Task> {
         return taskDao.getTasksOrderedByPriority()
     }
+
+    override fun addTasks(tasks: MutableList<Task>) {
+        taskDao.addTasks(tasks)
+    }
 }

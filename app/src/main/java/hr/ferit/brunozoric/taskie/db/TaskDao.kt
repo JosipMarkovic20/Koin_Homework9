@@ -18,6 +18,9 @@ interface TaskDao {
     @Insert(onConflict = IGNORE)
     fun insertTask(task: Task): Long
 
+    @Insert(onConflict = IGNORE)
+    fun addTasks(tasks: MutableList<Task>)
+
     @Update(onConflict = REPLACE)
     fun updateTask(task: Task)
 
@@ -27,15 +30,15 @@ interface TaskDao {
     @Query("DELETE FROM Task" )
     fun deleteAllTasks()
 
-    @Query("UPDATE task SET description = :taskDescription WHERE taskDbId = :taskId " )
+    @Query("UPDATE task SET content = :taskDescription WHERE taskDbId = :taskId " )
     fun changeTaskDescription (taskId: Int, taskDescription: String)
 
     @Query("UPDATE task SET title = :newTitle WHERE taskDbId = :taskId")
     fun changeTaskTitle(taskId: Int, newTitle: String)
 
-    @Query("UPDATE task SET priority = :newPriority WHERE taskDbId = :taskId")
+    @Query("UPDATE task SET taskPriority = :newPriority WHERE taskDbId = :taskId")
     fun changeTaskPriority(taskId: Int, newPriority: Priority)
 
-    @Query("SELECT * FROM task ORDER BY priority")
+    @Query("SELECT * FROM task ORDER BY taskPriority")
     fun getTasksOrderedByPriority(): List<Task>
 }

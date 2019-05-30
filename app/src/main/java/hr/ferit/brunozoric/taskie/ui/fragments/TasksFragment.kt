@@ -16,17 +16,24 @@ import androidx.recyclerview.widget.RecyclerView
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.*
 import hr.ferit.brunozoric.taskie.model.Task
+import hr.ferit.brunozoric.taskie.model.request.DeleteTaskRequest
+import hr.ferit.brunozoric.taskie.model.response.GetTasksResponse
+import hr.ferit.brunozoric.taskie.networking.BackendFactory
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import hr.ferit.brunozoric.taskie.ui.activities.ContainerActivity
 import hr.ferit.brunozoric.taskie.ui.activities.MainActivity
 import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tasks.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
 
     private val repository = TasksRoomRepository()
     private val adapter by lazy { TaskAdapter {onItemSelected(it)} }
+    private val interactor = BackendFactory.getTaskieInteractor()
 
     override fun getLayoutResourceId() = R.layout.fragment_tasks
 
@@ -35,7 +42,7 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         setHasOptionsMenu(true)
         initUi()
         initListeners()
-        refreshTasks()
+        getAllTasks()
     }
 
 
@@ -60,6 +67,41 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         addTask.setOnClickListener { addTask() }
     }
 
+    private fun getAllTasks() {
+        progress.visible()
+        interactor.getTasks(getTaskieCallback())
+    }
+
+    private fun getTaskieCallback(): Callback<GetTasksResponse> = object : Callback<GetTasksResponse> {
+        override fun onFailure(call: Call<GetTasksResponse>?, t: Throwable?) {
+            progress.gone()
+            //TODO : handle default error
+        }
+
+        override fun onResponse(call: Call<GetTasksResponse>?, response: Response<GetTasksResponse>) {
+            progress.gone()
+            noData.gone()
+            if (response.isSuccessful) {
+                when (response.code()) {
+                    RESPONSE_OK -> handleOkResponse(response)
+                    else -> handleSomethingWentWrong()
+                }
+            }
+        }
+    }
+
+    private fun handleOkResponse(response: Response<GetTasksResponse>) {
+        response.body()?.notes?.run {
+            repository.clearAllTasks()
+            this.forEach{
+                repository.addTask(it)
+            }
+            adapter.setData(this)
+        }
+    }
+
+    private fun handleSomethingWentWrong() = this.activity?.displayToast("Something went wrong!")
+
     private fun showDeleteTaskDialog(task: Task, position: Int){
         AlertDialog.Builder(context!!)
             .setTitle(getString(R.string.delete_task_dialog))
@@ -70,6 +112,8 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
             .setNegativeButton(android.R.string.no, null).show()
         refreshTasks()
     }
+
+
 
     private fun showClearAllTasksDialog(){
         AlertDialog.Builder(context!!)
@@ -89,14 +133,7 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
     }
 
     private fun refreshTasks() {
-        progress.gone()
-        val data = repository.getTasks()
-        if (data.isNotEmpty()) {
-            noData.gone()
-        } else {
-            noData.visible()
-        }
-        adapter.setData(data)
+        getAllTasks()
     }
 
     private fun addTask() {

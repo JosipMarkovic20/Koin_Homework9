@@ -57,14 +57,14 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
 
         context?.let {
             editPrioritySelector.adapter = ArrayAdapter<Priority>(it, android.R.layout.simple_spinner_dropdown_item, Priority.values())
-            val selection = when(task.priority.toString()){
+            val selection = when(task.taskPriority.toString()){
                 "LOW" -> 0
                 "MEDIUM" -> 1
                 "HIGH" -> 2
                 else -> 0
             }
             editTaskTitleInput.setText(task.title)
-            editTaskDescriptionInput.setText(task.description)
+            editTaskDescriptionInput.setText(task.content)
             editPrioritySelector.setSelection(selection)
         }
 

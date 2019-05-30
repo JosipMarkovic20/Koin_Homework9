@@ -1,7 +1,7 @@
 package hr.ferit.brunozoric.taskie.model
 
 import com.google.gson.annotations.SerializedName
-
+/*
 data class BackendTask(
     @SerializedName("id") val id: String,
     @SerializedName("userId") val userId: String,
@@ -10,4 +10,4 @@ data class BackendTask(
     @SerializedName("isFavorite") val isFavorite: Boolean,
     @SerializedName("taskPriority") val taskPriority: Int,
     @SerializedName("isCompleted") val isCompleted: Boolean
-)
+)*/

@@ -8,6 +8,7 @@ import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.common.gone
 import hr.ferit.brunozoric.taskie.common.visible
+import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
@@ -65,8 +66,13 @@ class TaskDetailsFragment : BaseFragment(), EditTaskFragmentDialog.TaskEditedLis
 
     private fun displayTask(task: Task) {
         detailsTaskTitle.text = task.title
-        detailsTaskDescription.text = task.description
-        detailsPriorityView.setBackgroundResource(task.priority.getColor())
+        detailsTaskDescription.text = task.content
+        val priorityColor = when (task.taskPriority) {
+            1 -> Priority.LOW
+            2 -> Priority.MEDIUM
+            else -> Priority.HIGH
+        }
+        detailsPriorityView.setBackgroundResource(priorityColor.getColor())
     }
 
     companion object {

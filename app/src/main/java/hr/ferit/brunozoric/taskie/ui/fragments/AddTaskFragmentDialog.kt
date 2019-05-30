@@ -9,17 +9,24 @@ import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import hr.ferit.brunozoric.taskie.R
+import hr.ferit.brunozoric.taskie.common.RESPONSE_OK
 import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
+import hr.ferit.brunozoric.taskie.model.request.AddTaskRequest
+import hr.ferit.brunozoric.taskie.networking.BackendFactory
 import hr.ferit.brunozoric.taskie.persistence.PriorityPrefs
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AddTaskFragmentDialog: DialogFragment() {
 
     private var taskAddedListener: TaskAddedListener? = null
     private val repository = TasksRoomRepository()
+    private val interactor = BackendFactory.getTaskieInteractor()
 
     interface TaskAddedListener{
         fun onTaskAdded(task: Task)
@@ -82,15 +89,16 @@ class AddTaskFragmentDialog: DialogFragment() {
         val title = newTaskTitleInput.text.toString()
         val description = newTaskDescriptionInput.text.toString()
         val priority = prioritySelector.selectedItem as Priority
-        val task = Task(title = title, description = description, priority = priority)
+        val task = Task(title = title, content = description, taskPriority = priority.getValue())
 
         repository.addTask(task)
 
         savePriority(priority.toString())
 
+        interactor.save(AddTaskRequest(title, description, priority.getValue()), addTaskCallback())
+
         clearUi()
 
-        taskAddedListener?.onTaskAdded(task)
         dismiss()
     }
 
@@ -98,6 +106,30 @@ class AddTaskFragmentDialog: DialogFragment() {
         newTaskTitleInput.text.clear()
         newTaskDescriptionInput.text.clear()
         prioritySelector.setSelection(0)
+    }
+
+    private fun addTaskCallback(): Callback<Task> = object : Callback<Task> {
+        override fun onFailure(call: Call<Task>?, t: Throwable?) {
+            //TODO : handle default error
+        }
+
+        override fun onResponse(call: Call<Task>?, response: Response<Task>) {
+            if (response.isSuccessful) {
+                when (response.code()) {
+                    RESPONSE_OK -> handleOkResponse(response.body())
+                    else -> handleSomethingWentWrong()
+                }
+            }
+        }
+    }
+
+    private fun handleOkResponse(task: Task?) = task?.run { onTaskiesReceived(this) }
+
+    private fun handleSomethingWentWrong() = this.activity?.displayToast("Something went wrong!")
+
+    private fun onTaskiesReceived(task: Task) {
+        taskAddedListener?.onTaskAdded(task)
+        dismiss()
     }
 
     private fun isInputEmpty(): Boolean = isEmpty(newTaskTitleInput.text) || isEmpty(newTaskDescriptionInput.text)

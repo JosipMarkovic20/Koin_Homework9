@@ -1,12 +1,12 @@
 package hr.ferit.brunozoric.taskie
-
+/*
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 import hr.ferit.brunozoric.taskie.persistence.PREFERENCES_NAME
 
-/*class Taskie: Application() {
+class Taskie: Application() {
 
     companion object {
         lateinit var instance: Taskie
