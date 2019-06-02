@@ -1,8 +1,12 @@
 package hr.ferit.brunozoric.taskie.ui.activities
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
@@ -22,7 +26,9 @@ class MainActivity : BaseActivity() {
     override fun setUpUi() {
         showFragment(TasksFragment.newInstance())
         selectFragment()
-
+        if(!isConnected()) {
+            noInternetDialog()
+        }
     }
 
 
@@ -51,8 +57,19 @@ class MainActivity : BaseActivity() {
         recreate()
     }
 
+    private fun noInternetDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.noInternet))
+            .setMessage(getString(R.string.noInternetDescription))
+            .setNeutralButton(getString(R.string.ok),null)
+            .show()
+    }
 
-
-
+    private fun isConnected(): Boolean {
+        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnected == true
+        return isConnected
+    }
 
 }

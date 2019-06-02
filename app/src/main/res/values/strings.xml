@@ -33,4 +33,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Name</string>
+    <string name="noInternet">Check your network!</string>
+    <string name="noInternetDescription">You are currently offline. You can see all yours previously added tasks, but all changes you make offline will not be saved.</string>
+    <string name="ok">OK</string>
 </resources>

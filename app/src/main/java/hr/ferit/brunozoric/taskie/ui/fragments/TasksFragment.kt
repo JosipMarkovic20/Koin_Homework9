@@ -49,7 +49,6 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         swipeToRefresh()
     }
 
-
     private fun initUi() {
         tasksRecyclerView.layoutManager = LinearLayoutManager(context)
         tasksRecyclerView.adapter = adapter
@@ -65,11 +64,7 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView)
 
-        if(isConnected()){
-            getAllTasks()
-        }else{
-            adapter.setData(repository.getTasks())
-        }
+        getAllTasks()
 
     }
 
@@ -78,9 +73,15 @@ class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
     }
 
     private fun getAllTasks() {
-        progress.visible()
-        interactor.getTasks(getTaskieCallback())
+        if(isConnected()){
+            progress.visible()
+            interactor.getTasks(getTaskieCallback())
+        }else{
+            adapter.setData(repository.getTasks())
+        }
     }
+
+
 
     private fun swipeToRefresh(){
         val pullToRefresh = taskSwipeRefresh
