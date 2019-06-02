@@ -1,6 +1,7 @@
 package hr.ferit.brunozoric.taskie.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat.recreate
 import hr.ferit.brunozoric.taskie.R
@@ -70,8 +71,10 @@ class TaskDetailsFragment : BaseFragment(), EditTaskFragmentDialog.TaskEditedLis
         val priorityColor = when (task.taskPriority) {
             1 -> Priority.LOW
             2 -> Priority.MEDIUM
-            else -> Priority.HIGH
+            3 -> Priority.HIGH
+            else -> Priority.LOW
         }
+        Log.d("Tag","${task.taskPriority}")
         detailsPriorityView.setBackgroundResource(priorityColor.getColor())
     }
 

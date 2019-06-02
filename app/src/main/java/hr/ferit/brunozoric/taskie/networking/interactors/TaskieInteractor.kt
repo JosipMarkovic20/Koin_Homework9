@@ -2,16 +2,16 @@ package hr.ferit.brunozoric.taskie.networking.interactors
 
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.model.request.AddTaskRequest
-import hr.ferit.brunozoric.taskie.model.request.DeleteTaskRequest
+import hr.ferit.brunozoric.taskie.model.request.EditTaskRequest
 import hr.ferit.brunozoric.taskie.model.request.UserDataRequest
-import hr.ferit.brunozoric.taskie.model.response.GetTasksResponse
-import hr.ferit.brunozoric.taskie.model.response.LoginResponse
-import hr.ferit.brunozoric.taskie.model.response.RegisterResponse
+import hr.ferit.brunozoric.taskie.model.response.*
 import retrofit2.Callback
 
 interface TaskieInteractor {
 
-    fun deleteTask(request: String, deleteCallback: Callback<DeleteTaskRequest>)
+    fun deleteTask(request: String, deleteCallback: Callback<DeleteTaskResponse>)
+
+    fun editTask(request: EditTaskRequest, editCallback: Callback<EditTaskResponse>)
 
     fun getTasks(taskieResponseCallback: Callback<GetTasksResponse>)
 

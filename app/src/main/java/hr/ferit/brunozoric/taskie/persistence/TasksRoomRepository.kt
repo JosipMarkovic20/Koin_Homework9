@@ -7,8 +7,15 @@ import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 
 class TasksRoomRepository : TasksRepository {
+
+
     private var db: DaoProvider = DaoProvider.getInstance(TaskieApp.getAppContext())
     private var taskDao: TaskDao = db.taskDao()
+
+    override fun saveAllTasks(tasks: MutableList<Task>) {
+        taskDao.saveAllTasks(tasks)
+    }
+
     override fun addTask(task: Task) {
         taskDao.insertTask(task)
     }
@@ -29,7 +36,7 @@ class TasksRoomRepository : TasksRepository {
         taskDao.deleteAllTasks()
     }
 
-    override fun editTask(task: Task, newTitle: String, newDescription: String, newPriority: Priority) {
+    override fun editTask(task: Task, newTitle: String, newDescription: String, newPriority: Int) {
         taskDao.changeTaskTitle(task.taskDbId!!,newTitle)
         taskDao.changeTaskDescription(task.taskDbId!!, newDescription)
         taskDao.changeTaskPriority(task.taskDbId!!,newPriority)
@@ -39,7 +46,4 @@ class TasksRoomRepository : TasksRepository {
         return taskDao.getTasksOrderedByPriority()
     }
 
-    override fun addTasks(tasks: MutableList<Task>) {
-        taskDao.addTasks(tasks)
-    }
 }

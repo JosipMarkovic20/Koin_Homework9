@@ -12,7 +12,6 @@ class ContainerActivity: BaseActivity() {
 
     override fun getLayoutResourceId() = R.layout.activity_main
 
-
     override fun setUpUi() {
         val screenType = intent.getStringExtra(EXTRA_SCREEN_TYPE)
         val id = intent.getIntExtra(EXTRA_TASK_ID, -1)
@@ -25,7 +24,6 @@ class ContainerActivity: BaseActivity() {
         }
         navigationView.visibility= View.INVISIBLE
     }
-
 
     companion object{
         const val SCREEN_TASK_DETAILS = "task_details"

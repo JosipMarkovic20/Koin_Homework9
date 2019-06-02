@@ -9,14 +9,22 @@ import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import hr.ferit.brunozoric.taskie.R
+import hr.ferit.brunozoric.taskie.common.RESPONSE_OK
 import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
+import hr.ferit.brunozoric.taskie.model.request.EditTaskRequest
+import hr.ferit.brunozoric.taskie.model.response.DeleteTaskResponse
+import hr.ferit.brunozoric.taskie.model.response.EditTaskResponse
+import hr.ferit.brunozoric.taskie.networking.BackendFactory
 import hr.ferit.brunozoric.taskie.persistence.PriorityPrefs
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.view.*
 import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
@@ -24,6 +32,7 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
     private var repository = TasksRoomRepository()
     private var taskEditedListener: TaskEditedListener? = null
     lateinit var task: Task
+    private val interactor = BackendFactory.getTaskieInteractor()
 
     interface TaskEditedListener{
         fun onTaskEdited(task: Task)
@@ -57,7 +66,7 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
 
         context?.let {
             editPrioritySelector.adapter = ArrayAdapter<Priority>(it, android.R.layout.simple_spinner_dropdown_item, Priority.values())
-            val selection = when(task.taskPriority.toString()){
+            val selection = when(getCurrentPriority()){
                 "LOW" -> 0
                 "MEDIUM" -> 1
                 "HIGH" -> 2
@@ -87,7 +96,6 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
 
     private fun initListeners() {
         saveEditTaskAction.setOnClickListener {
-
             editTask()
         }
     }
@@ -106,17 +114,39 @@ class EditTaskFragmentDialog(var taskID: Int) : DialogFragment() {
         val description = editTaskDescriptionInput.text.toString()
         val priority = editPrioritySelector.selectedItem as Priority
 
+        val request = EditTaskRequest(task.id, title, description, priority.getValue())
 
-        repository.editTask(task, title, description, priority)
+        interactor.editTask(request, editTaskCallback())
 
+        repository.editTask(task, title, description, priority.getValue())
         savePriority(priority.toString())
-
         clearUi()
-
         taskEditedListener?.onTaskEdited(task)
-
         dismiss()
 
+    }
+
+    private fun editTaskCallback(): Callback<EditTaskResponse> = object : Callback<EditTaskResponse> {
+        override fun onFailure(call: Call<EditTaskResponse>?, t: Throwable?) {
+            //TODO : handle default error
+        }
+
+        override fun onResponse(call: Call<EditTaskResponse>?, response: Response<EditTaskResponse>) {
+            if (response.isSuccessful) {
+                when (response.code()) {
+                    RESPONSE_OK -> handleOkEditResponse()
+                    else -> handleSomethingWentWrong()
+                }
+            }
+        }
+    }
+
+    private fun handleOkEditResponse(){
+        activity?.displayToast("Task successfully edited!")
+    }
+
+    private fun handleSomethingWentWrong(){
+        activity?.displayToast("Something went wrong!")
     }
 
 
