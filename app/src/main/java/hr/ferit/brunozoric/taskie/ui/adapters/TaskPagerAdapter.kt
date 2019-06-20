@@ -3,9 +3,8 @@ package hr.ferit.brunozoric.taskie.ui.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import hr.ferit.brunozoric.taskie.ui.fragments.AboutAppFragment
-import hr.ferit.brunozoric.taskie.ui.fragments.AboutMeFragment
-import hr.ferit.brunozoric.taskie.ui.fragments.TasksFragment
+import hr.ferit.brunozoric.taskie.ui.about.AboutAppFragment
+import hr.ferit.brunozoric.taskie.ui.about.AboutMeFragment
 
 
 class TaskPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {

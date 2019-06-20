@@ -1,23 +1,17 @@
-package hr.ferit.brunozoric.taskie.ui.fragments
+package hr.ferit.brunozoric.taskie.ui.taskDetails.fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat.recreate
 import hr.ferit.brunozoric.taskie.R
 import hr.ferit.brunozoric.taskie.common.EXTRA_TASK_ID
 import hr.ferit.brunozoric.taskie.common.displayToast
-import hr.ferit.brunozoric.taskie.common.gone
-import hr.ferit.brunozoric.taskie.common.visible
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
-import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
+import hr.ferit.brunozoric.taskie.ui.editTask.EditTaskFragmentDialog
+import hr.ferit.brunozoric.taskie.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_task_details.*
-import kotlinx.android.synthetic.main.fragment_tasks.*
-
 
 
 class TaskDetailsFragment : BaseFragment(), EditTaskFragmentDialog.TaskEditedListener {

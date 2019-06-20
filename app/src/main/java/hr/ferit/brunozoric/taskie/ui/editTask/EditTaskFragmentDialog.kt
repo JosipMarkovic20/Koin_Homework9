@@ -1,4 +1,4 @@
-package hr.ferit.brunozoric.taskie.ui.fragments
+package hr.ferit.brunozoric.taskie.ui.editTask
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -14,14 +14,11 @@ import hr.ferit.brunozoric.taskie.common.displayToast
 import hr.ferit.brunozoric.taskie.model.Priority
 import hr.ferit.brunozoric.taskie.model.Task
 import hr.ferit.brunozoric.taskie.model.request.EditTaskRequest
-import hr.ferit.brunozoric.taskie.model.response.DeleteTaskResponse
 import hr.ferit.brunozoric.taskie.model.response.EditTaskResponse
 import hr.ferit.brunozoric.taskie.networking.BackendFactory
 import hr.ferit.brunozoric.taskie.persistence.PriorityPrefs
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
 import kotlinx.android.synthetic.main.fragment_dialog_edit_task.*
-import kotlinx.android.synthetic.main.fragment_dialog_edit_task.view.*
-import kotlinx.android.synthetic.main.fragment_dialog_new_task.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

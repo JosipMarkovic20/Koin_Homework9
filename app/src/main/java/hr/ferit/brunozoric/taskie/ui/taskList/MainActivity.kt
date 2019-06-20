@@ -1,19 +1,13 @@
-package hr.ferit.brunozoric.taskie.ui.activities
+package hr.ferit.brunozoric.taskie.ui.taskList
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import hr.ferit.brunozoric.taskie.R
-import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
-import hr.ferit.brunozoric.taskie.ui.activities.base.BaseActivity
-import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
-import hr.ferit.brunozoric.taskie.ui.fragments.PagerFragment
-import hr.ferit.brunozoric.taskie.ui.fragments.TasksFragment
+import hr.ferit.brunozoric.taskie.ui.base.BaseActivity
+import hr.ferit.brunozoric.taskie.ui.pager.PagerFragment
+import hr.ferit.brunozoric.taskie.ui.taskList.fragment.TasksFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 

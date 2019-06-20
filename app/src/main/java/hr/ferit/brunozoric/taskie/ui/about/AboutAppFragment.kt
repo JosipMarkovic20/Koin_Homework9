@@ -1,4 +1,4 @@
-package hr.ferit.brunozoric.taskie.ui.fragments
+package hr.ferit.brunozoric.taskie.ui.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import hr.ferit.brunozoric.taskie.R
-import hr.ferit.brunozoric.taskie.ui.adapters.TaskPagerAdapter
-import kotlinx.android.synthetic.main.fragment_about_app.*
-import kotlinx.android.synthetic.main.fragment_about_me.*
 
 
 class AboutAppFragment: Fragment() {

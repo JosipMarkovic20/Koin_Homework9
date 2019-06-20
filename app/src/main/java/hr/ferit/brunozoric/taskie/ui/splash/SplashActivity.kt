@@ -1,10 +1,12 @@
-package hr.ferit.brunozoric.taskie.ui.activities
+package hr.ferit.brunozoric.taskie.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import hr.ferit.brunozoric.taskie.persistence.provideSharedPrefs
+import hr.ferit.brunozoric.taskie.ui.register.RegisterActivity
+import hr.ferit.brunozoric.taskie.ui.taskList.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 

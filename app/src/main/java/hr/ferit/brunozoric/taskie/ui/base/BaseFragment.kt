@@ -1,4 +1,4 @@
-package hr.ferit.brunozoric.taskie.ui.fragments.base
+package hr.ferit.brunozoric.taskie.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,11 +1,10 @@
-package hr.ferit.brunozoric.taskie.ui.fragments
+package hr.ferit.brunozoric.taskie.ui.taskList.fragment
 
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -22,15 +21,14 @@ import hr.ferit.brunozoric.taskie.model.response.DeleteTaskResponse
 import hr.ferit.brunozoric.taskie.model.response.GetTasksResponse
 import hr.ferit.brunozoric.taskie.networking.BackendFactory
 import hr.ferit.brunozoric.taskie.persistence.TasksRoomRepository
-import hr.ferit.brunozoric.taskie.ui.activities.ContainerActivity
+import hr.ferit.brunozoric.taskie.ui.taskDetails.ContainerActivity
 import hr.ferit.brunozoric.taskie.ui.adapters.TaskAdapter
-import hr.ferit.brunozoric.taskie.ui.fragments.base.BaseFragment
+import hr.ferit.brunozoric.taskie.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
+import hr.ferit.brunozoric.taskie.ui.addTask.AddTaskFragmentDialog
 
 
 class TasksFragment : BaseFragment(), AddTaskFragmentDialog.TaskAddedListener {
